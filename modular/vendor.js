@@ -12,7 +12,6 @@ require('dotenv').config();
 
 let storeName = process.env.STORE_NAME;
 
-events.on('delivered', thankYou);
 
 //create a new customer order ever 5 seconds (using setInterval() new orders should include: storeName, orderId, customerName, address)
 setInterval( () => {
@@ -24,15 +23,16 @@ setInterval( () => {
     storeName: storeName,
     address: address, 
     customerName: customerName,
-    orderId: orderId
+    orderId: orderId,
   }
   console.log(payload);
   //emit 'pick up' event and attach fake order as payload
   events.emit('pickup', payload);
 }, 5000)
 
+events.on('delivered', thankYou);
 
-function thankYou() {
+function thankYou(payload) {
   console.log(`VENDOR: thank you for delivery ${payload.orderId}`)
 }
 

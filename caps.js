@@ -6,3 +6,6 @@
 const vendor = require('./modular/vendor.js')
 
 const driver = require('./modular/driver.js')
+
+const events = require('./modular/events.js')
+
