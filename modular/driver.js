@@ -6,22 +6,34 @@ const events = require('./events.js');
 
 
 events.on('pickup', inTransit)
-events.on('in-transit', delivered);
+events.on('pickup', delivered)
 
 function inTransit(payload){
-    setInterval(() => {
+    setTimeout(() => {
     console.log(`DRIVER: picked up ${payload.orderId}`)
     events.emit('in-transit', payload)
   }, 1000)
+
 }
 
-
 function delivered(payload){
-   setInterval( () => {
-    console.log(`DRIVER: delivered ${payload.oderId}`);
+  setTimeout( () => {
+    console.log(`DRIVER: delivered ${payload.orderId}`);
     events.emit('delivered', payload);
   }, 3000) 
 }
+
+//separate these^^^ 
+
+
+// events.on('in-transit', delivered);
+
+// function delivered(payload){
+//    setInterval( () => {
+//     console.log(`DRIVER: delivered ${payload.orderId}`);
+//     events.emit('delivered', payload);
+//   }, 3000) 
+// }
   
 
 
